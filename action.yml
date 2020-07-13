@@ -1,0 +1,40 @@
+name: 'docker-compose ssh deploy'
+description: 'Deploy a pre-rendered docker-compose.yml via ssh'
+inputs:
+  username:  # id of input
+    description: 'SSH Username'
+    required: true
+    default: 'root'
+  host:
+    description: 'SSH Host'
+    required: true
+    default: ''
+  port:
+    description: 'SSH Port'
+    required: true
+    default: '22'
+  project_name:
+    description: 'Project Name'
+    required: true
+    default: ''
+  environment:
+    description: 'Deploy Enviornment'
+    required: true
+    default: ''
+  docker_registry:
+    description: 'Deploy Enviornment'
+    required: true
+    default: 'https://docker.pkg.github.com'
+  docker_registry_user:
+    description: 'Deploy Enviornment'
+    required: true
+    default: ''
+  docker_registry_password:
+    description: 'Deploy Enviornment'
+    required: true
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.username }} ${{ inputs.host }} ${{ inputs.port }} ${{ inputs.project_name }} ${{ inputs.environment }} ${{ inputs.docker_registry }} ${{ inputs.docker_registry_user }} ${{ inputs.docker_registry_password }}
